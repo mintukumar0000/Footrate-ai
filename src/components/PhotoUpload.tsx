@@ -9,7 +9,7 @@ import { realFootAnalysisAI, type RealFootAnalysisResult } from '@/lib/realFootA
 import { SubscriptionService, SubscriptionStatus } from '@/lib/subscriptionService';
 
 interface PhotoUploadProps {
-  onAnalysisComplete: (analysis: RealFootAnalysisResult) => void;
+  onAnalysisComplete: (analysis: RealFootAnalysisResult, originalImageUrl: string) => void;
   userId?: string;
 }
 
@@ -139,7 +139,7 @@ export const PhotoUpload = ({ onAnalysisComplete, userId }: PhotoUploadProps) =>
           }
         }
         
-        onAnalysisComplete(analysis);
+        onAnalysisComplete(analysis, imageDataUrl);
         setAnalyzing(false);
         setAnalysisStage('');
         
@@ -213,36 +213,36 @@ export const PhotoUpload = ({ onAnalysisComplete, userId }: PhotoUploadProps) =>
     <>
       {/* Inline Pro Features Section */}
       {showInlineUpgrade && subscriptionStatus && (
-        <Card className="mb-4 sm:mb-6 bg-black/90 backdrop-blur-2xl border border-blue-300/30 rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden">
+        <Card className="mb-4 sm:mb-6 bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
           <div className="p-4 sm:p-6 lg:p-8">
             {/* Header */}
             <div className="text-center mb-6 sm:mb-8">
               <div className="flex items-center justify-between mb-4">
-                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-2xl sm:rounded-3xl flex items-center justify-center shadow-2xl">
-                  <Crown className="w-8 h-8 sm:w-10 sm:h-10 text-black" />
+                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-black rounded-xl flex items-center justify-center">
+                  <Crown className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
                 </div>
                 <button
                   onClick={() => setShowInlineUpgrade(false)}
-                  className="text-gray-400 hover:text-white transition-colors"
+                  className="text-gray-500 hover:text-gray-700 transition-colors"
                 >
                   ✕
                 </button>
               </div>
               
-              <Badge className="bg-red-500/20 text-red-300 border-red-500/30 mb-3 sm:mb-4 text-xs sm:text-sm">
+              <Badge className="bg-red-100 text-red-700 border-red-200 mb-3 sm:mb-4 text-xs sm:text-sm">
                 Limit Reached
               </Badge>
               
-              <h2 className="text-2xl sm:text-3xl font-thin text-white mb-2 sm:mb-3 tracking-wide">
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2 sm:mb-3 tracking-wide">
                 Pro
               </h2>
               
-              <div className="inline-flex items-center gap-2 bg-black/60 border border-blue-300/20 rounded-full px-4 py-2 sm:px-6 sm:py-3 mb-3">
-                <span className="text-xl sm:text-2xl font-thin text-white">$9</span>
-                <span className="text-xs sm:text-sm text-gray-400">/month</span>
+              <div className="inline-flex items-center gap-2 bg-gray-100 border border-gray-200 rounded-full px-4 py-2 sm:px-6 sm:py-3 mb-3">
+                <span className="text-xl sm:text-2xl font-bold text-gray-900">$9</span>
+                <span className="text-xs sm:text-sm text-gray-600">/month</span>
               </div>
               
-              <p className="text-sm sm:text-base text-gray-400 font-light leading-relaxed">
+              <p className="text-sm sm:text-base text-gray-600 font-medium leading-relaxed">
                 For serious foot care
               </p>
             </div>
@@ -260,8 +260,8 @@ export const PhotoUpload = ({ onAnalysisComplete, userId }: PhotoUploadProps) =>
                 "Early access to new features"
               ].map((feature, index) => (
                 <div key={index} className="flex items-center gap-3 sm:gap-4">
-                  <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400 flex-shrink-0" />
-                  <span className="text-sm sm:text-base text-gray-300 font-light">{feature}</span>
+                  <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-blue-500 flex-shrink-0" />
+                  <span className="text-sm sm:text-base text-gray-700 font-medium">{feature}</span>
                 </div>
               ))}
             </div>
@@ -270,7 +270,7 @@ export const PhotoUpload = ({ onAnalysisComplete, userId }: PhotoUploadProps) =>
             <div className="text-center">
               <Button
                 onClick={handleUpgrade}
-                className="w-full sm:w-auto bg-gradient-to-r from-blue-400 to-cyan-400 hover:from-blue-500 hover:to-cyan-500 text-black font-medium py-3 px-8 rounded-xl sm:rounded-2xl shadow-xl transition-all duration-300 text-sm sm:text-base"
+                className="w-full sm:w-auto bg-black text-white hover:bg-gray-900 border border-black hover:border-gray-900 font-medium py-3 px-8 rounded-xl shadow-lg transition-all duration-300 text-sm sm:text-base"
               >
                 <Crown className="w-4 h-4 mr-2" />
                 Upgrade to Pro
@@ -286,10 +286,10 @@ export const PhotoUpload = ({ onAnalysisComplete, userId }: PhotoUploadProps) =>
         </Card>
       )}
 
-      <Card className="relative overflow-hidden bg-card/60 backdrop-blur-xl border-primary/20 shadow-neon">
+      <Card className="relative overflow-hidden bg-white border border-gray-200 shadow-sm">
       <div
         className={`p-4 sm:p-6 md:p-8 border-2 border-dashed transition-all duration-300 ${
-          dragActive ? 'border-primary bg-primary/10 shadow-glow' : 'border-primary/30'
+          dragActive ? 'border-blue-500 bg-blue-50' : 'border-gray-300'
         } ${analyzing ? 'animate-pulse' : ''}`}
         onDragEnter={handleDrag}
         onDragLeave={handleDrag}
@@ -330,19 +330,19 @@ export const PhotoUpload = ({ onAnalysisComplete, userId }: PhotoUploadProps) =>
             </div>
           ) : (
             <>
-              <div className="mx-auto w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-neon-gradient rounded-full flex items-center justify-center shadow-neon">
+              <div className="mx-auto w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-black rounded-full flex items-center justify-center">
                 {analyzing ? (
-                  <Brain className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-black animate-pulse" />
+                  <Brain className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-white animate-pulse" />
                 ) : (
-                  <Upload className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-black" />
+                  <Upload className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-white" />
                 )}
               </div>
               
               <div className="space-y-1 sm:space-y-2">
-                <h3 className="text-lg sm:text-xl font-semibold text-foreground">
+                <h3 className="text-lg sm:text-xl font-semibold text-gray-900">
                   Upload Your Foot Photo
                 </h3>
-                <p className="text-sm sm:text-base text-muted-foreground px-2 sm:px-0">
+                <p className="text-sm sm:text-base text-gray-700 px-2 sm:px-0">
                   Drag and drop your image here, or click to select
                 </p>
               </div>
@@ -350,7 +350,7 @@ export const PhotoUpload = ({ onAnalysisComplete, userId }: PhotoUploadProps) =>
               <div className="flex gap-3 sm:gap-4 justify-center">
                 <Button
                   size="lg"
-                  className="bg-neon-gradient hover:shadow-neon transition-all duration-300 text-black font-semibold text-sm sm:text-base px-6 py-3 sm:px-8 sm:py-4"
+                  className="bg-black text-white hover:bg-gray-900 border border-black hover:border-gray-900 transition-all duration-300 font-semibold text-sm sm:text-base px-6 py-3 sm:px-8 sm:py-4"
                   onClick={() => document.getElementById('file-input')?.click()}
                   disabled={analyzing}
                 >
@@ -374,13 +374,13 @@ export const PhotoUpload = ({ onAnalysisComplete, userId }: PhotoUploadProps) =>
 
       {/* Subscription Status Display */}
       {subscriptionStatus && (
-        <div className="mt-3 sm:mt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 p-3 sm:p-4 bg-black/60 backdrop-blur-xl border border-blue-300/20 rounded-xl sm:rounded-2xl">
+        <div className="mt-3 sm:mt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 p-3 sm:p-4 bg-gray-50 border border-gray-200 rounded-xl">
           <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
             <Badge 
               variant={subscriptionStatus.currentTier === 'pro' ? 'default' : 'secondary'}
               className={`self-start ${subscriptionStatus.currentTier === 'pro' 
-                ? 'bg-gradient-to-r from-blue-400 to-cyan-400 text-black' 
-                : 'bg-gray-700 text-gray-300'}`}
+                ? 'bg-black text-white' 
+                : 'bg-gray-600 text-white'}`}
             >
               {subscriptionStatus.currentTier === 'pro' ? (
                 <><Crown className="w-3 h-3 mr-1" />Pro</>

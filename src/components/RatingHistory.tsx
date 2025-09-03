@@ -78,24 +78,24 @@ export const RatingHistory = ({ userId }: RatingHistoryProps) => {
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Brain className="w-5 h-5 text-primary" />
-          <h3 className="font-semibold text-foreground">AI Analysis History</h3>
+          <Brain className="w-5 h-5 text-blue-500" />
+          <h3 className="font-semibold text-gray-900">AI Analysis History</h3>
         </div>
         {analyses.length > 0 && (
           <div className="text-right">
-            <div className="text-lg font-bold bg-neon-gradient bg-clip-text text-transparent">
+            <div className="text-lg font-bold text-gray-900">
               {averageRating.toFixed(1)}/10
             </div>
-            <p className="text-xs text-muted-foreground">Avg Score</p>
+            <p className="text-xs text-gray-600">Avg Score</p>
           </div>
         )}
       </div>
 
       {analyses.length === 0 ? (
         <div className="text-center py-8">
-          <Sparkles className="w-12 h-12 text-muted-foreground mx-auto mb-3 opacity-40" />
-          <p className="text-sm text-muted-foreground">No AI analyses yet</p>
-          <p className="text-xs text-muted-foreground mt-1">
+          <Sparkles className="w-12 h-12 text-gray-400 mx-auto mb-3 opacity-40" />
+          <p className="text-sm text-gray-600">No AI analyses yet</p>
+          <p className="text-xs text-gray-500 mt-1">
             Upload your first photo for real AI analysis
           </p>
         </div>
@@ -108,23 +108,23 @@ export const RatingHistory = ({ userId }: RatingHistoryProps) => {
             return (
               <div
                 key={analysis.id}
-                className="p-3 rounded-lg bg-secondary/20 border border-primary/10 hover:border-primary/20 transition-all duration-200"
+                className="p-3 rounded-lg bg-gray-50 border border-gray-200 hover:border-gray-300 transition-all duration-200"
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 bg-neon-gradient rounded-full flex items-center justify-center">
-                      <IconComponent className="w-4 h-4 text-black" />
+                    <div className="w-8 h-8 bg-black rounded-full flex items-center justify-center">
+                      <IconComponent className="w-4 h-4 text-white" />
                     </div>
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="font-bold text-foreground">
+                        <span className="font-bold text-gray-900">
                           {analysis.overall_score.toFixed(1)}/10
                         </span>
                         <Badge variant="outline" className={`text-xs ${category.color}`}>
                           {category.label}
                         </Badge>
                       </div>
-                      <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                      <div className="flex items-center gap-1 text-xs text-gray-600">
                         <Calendar className="w-3 h-3" />
                         {new Date(analysis.created_at).toLocaleDateString()}
                         <span className="ml-2 flex items-center gap-1">
@@ -152,34 +152,34 @@ export const RatingHistory = ({ userId }: RatingHistoryProps) => {
                 {/* Mini breakdown */}
                 <div className="mt-2 grid grid-cols-5 gap-1 text-xs">
                   <div className="text-center">
-                    <div className={`text-xs font-medium ${analysis.skin_score >= 7 ? 'text-green-400' : analysis.skin_score >= 5 ? 'text-yellow-400' : 'text-red-400'}`}>
+                    <div className={`text-xs font-medium ${analysis.skin_score >= 7 ? 'text-green-500' : analysis.skin_score >= 5 ? 'text-yellow-500' : 'text-red-500'}`}>
                       {analysis.skin_score.toFixed(1)}
                     </div>
-                    <div className="text-muted-foreground">Skin</div>
+                    <div className="text-gray-600">Skin</div>
                   </div>
                   <div className="text-center">
-                    <div className={`text-xs font-medium ${analysis.nail_score >= 7 ? 'text-green-400' : analysis.nail_score >= 5 ? 'text-yellow-400' : 'text-red-400'}`}>
+                    <div className={`text-xs font-medium ${analysis.nail_score >= 7 ? 'text-green-500' : analysis.nail_score >= 5 ? 'text-yellow-500' : 'text-red-500'}`}>
                       {analysis.nail_score.toFixed(1)}
                     </div>
-                    <div className="text-muted-foreground">Nails</div>
+                    <div className="text-gray-600">Nails</div>
                   </div>
                   <div className="text-center">
-                    <div className={`text-xs font-medium ${analysis.shape_score >= 7 ? 'text-green-400' : analysis.shape_score >= 5 ? 'text-yellow-400' : 'text-red-400'}`}>
+                    <div className={`text-xs font-medium ${analysis.shape_score >= 7 ? 'text-green-500' : analysis.shape_score >= 5 ? 'text-yellow-500' : 'text-red-500'}`}>
                       {analysis.shape_score.toFixed(1)}
                     </div>
-                    <div className="text-muted-foreground">Shape</div>
+                    <div className="text-gray-600">Shape</div>
                   </div>
                   <div className="text-center">
-                    <div className={`text-xs font-medium ${analysis.symmetry_score >= 7 ? 'text-green-400' : analysis.symmetry_score >= 5 ? 'text-yellow-400' : 'text-red-400'}`}>
+                    <div className={`text-xs font-medium ${analysis.symmetry_score >= 7 ? 'text-green-500' : analysis.symmetry_score >= 5 ? 'text-yellow-500' : 'text-red-500'}`}>
                       {analysis.symmetry_score.toFixed(1)}
                     </div>
-                    <div className="text-muted-foreground">Symm</div>
+                    <div className="text-gray-600">Symm</div>
                   </div>
                   <div className="text-center">
-                    <div className={`text-xs font-medium ${analysis.cleanliness_score >= 7 ? 'text-green-400' : analysis.cleanliness_score >= 5 ? 'text-yellow-400' : 'text-red-400'}`}>
+                    <div className={`text-xs font-medium ${analysis.cleanliness_score >= 7 ? 'text-green-500' : analysis.cleanliness_score >= 5 ? 'text-yellow-500' : 'text-red-500'}`}>
                       {analysis.cleanliness_score.toFixed(1)}
                     </div>
-                    <div className="text-muted-foreground">Clean</div>
+                    <div className="text-gray-600">Clean</div>
                   </div>
                 </div>
               </div>

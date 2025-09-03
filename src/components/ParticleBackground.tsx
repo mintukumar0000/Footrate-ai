@@ -47,7 +47,7 @@ export const ParticleBackground = () => {
     }
 
     const animate = () => {
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       particlesRef.current.forEach((particle, index) => {
@@ -68,14 +68,14 @@ export const ParticleBackground = () => {
         // Draw particle
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(147, 197, 253, ${opacity * 0.8})`; // Light blue
+        ctx.fillStyle = `rgba(147, 197, 253, ${opacity * 0.6})`; // Light blue
         ctx.fill();
 
         // Add sparkle effect
         if (Math.random() > 0.98) {
           ctx.beginPath();
           ctx.arc(particle.x, particle.y, particle.size * 2, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(255, 255, 255, ${opacity * 0.6})`;
+          ctx.fillStyle = `rgba(59, 130, 246, ${opacity * 0.8})`; // Blue sparkle
           ctx.fill();
         }
 
@@ -93,7 +93,7 @@ export const ParticleBackground = () => {
           const distance = Math.sqrt(dx * dx + dy * dy);
 
           if (distance < 100) {
-            const opacity = (100 - distance) / 100 * 0.1;
+            const opacity = (100 - distance) / 100 * 0.05;
             ctx.beginPath();
             ctx.moveTo(particle1.x, particle1.y);
             ctx.lineTo(particle2.x, particle2.y);
@@ -121,7 +121,7 @@ export const ParticleBackground = () => {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 pointer-events-none z-0"
-      style={{ background: 'linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%)' }}
+      style={{ background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #f1f5f9 100%)' }}
     />
   );
 };
